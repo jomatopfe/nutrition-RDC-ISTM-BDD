@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nutrition en RDC : trois projets</title>
+<style>
+body{margin:0;font:16px/1.5 system-ui,Segoe UI,Roboto,sans-serif;background:#fbfaf5;color:#1d2a22}
+.hero{background:#1f5d3a;color:#fff;padding:28px 16px 0}.hero div{max-width:900px;margin:0 auto}
+.hero h1{margin:0 0 6px;font-size:1.7rem}.hero p{margin:0 0 16px;opacity:.9;max-width:62ch}
+nav{display:flex;gap:6px;flex-wrap:wrap}nav button{border:0;background:#2f7a50;color:#fff;padding:10px 16px;border-radius:8px 8px 0 0;font:inherit;font-weight:600;cursor:pointer}
+nav button.on{background:#fbfaf5;color:#1f5d3a}nav button:focus-visible{outline:3px solid #f2b632}
+iframe{display:block;width:100%;max-width:900px;margin:0 auto;height:calc(100vh - 150px);min-height:600px;border:0}
+.note{max-width:900px;margin:0 auto;padding:8px 16px 24px;font-size:.9rem;color:#55645a}
+</style></head><body>
+<div class="hero"><div><h1>Mieux suivre la nutrition en RDC</h1><p>Trois outils simples, conçus à l'ISTM Bandundu : repérer les enfants malnutris, composer des repas avec les aliments du pays, surveiller les maladies dans les structures de santé.</p>
+<nav><button id="b0" onclick="show(0)" class=on>1. Dépistage malnutrition</button><button id="b1" onclick="show(1)">2. Repas locaux</button><button id="b2" onclick="show(2)">3. Surveillance</button></nav></div></div>
+<iframe id="f0" title="Dépistage malnutrition" srcdoc="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;fr&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Dépistage de la malnutrition infantile&lt;/title&gt;&lt;style&gt;
+:root{--vert:#1f5d3a;--vert2:#e6f0e8;--sol:#f2b632;--encre:#1d2a22;--fond:#fbfaf5;--rouge:#c0392b;--orange:#e67e22}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif;color:var(--encre);background:var(--fond)}
+header{background:var(--vert);color:#fff;padding:20px 16px}header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;opacity:.85}
+header a{color:var(--sol)}main{max-width:760px;margin:0 auto;padding:16px}
+section{background:#fff;border:1px solid #dfe5da;border-radius:10px;padding:16px;margin-bottom:16px}
+h2{margin:0 0 12px;font-size:1.15rem}label{display:block;font-weight:600;margin:10px 0 4px}
+input,select{width:100%;padding:10px;border:1px solid #b9c4b8;border-radius:6px;font:inherit}
+input[type=checkbox]{width:auto}button{background:var(--vert);color:#fff;border:0;border-radius:6px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;margin-top:12px}
+button.sec{background:#fff;color:var(--vert);border:1px solid var(--vert)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sol);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.row{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid #e5e9e1}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:700;font-size:.9rem}
+.note{font-size:.9rem;color:#55645a}.vide{color:#55645a;font-style:italic}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;&lt;h1&gt;Dépistage de la malnutrition infantile&lt;/h1&gt;&lt;p&gt;Classement selon le périmètre brachial (PB) et les œdèmes.&lt;/p&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;section&gt;&lt;h2&gt;Nouvel enfant&lt;/h2&gt;
+&lt;label for=&quot;nom&quot;&gt;Nom&lt;/label&gt;&lt;input id=&quot;nom&quot; autocomplete=&quot;off&quot;&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;&lt;label for=&quot;age&quot;&gt;Âge (en mois)&lt;/label&gt;&lt;input id=&quot;age&quot; type=&quot;number&quot; min=&quot;6&quot; max=&quot;59&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;pb&quot;&gt;Périmètre brachial (mm)&lt;/label&gt;&lt;input id=&quot;pb&quot; type=&quot;number&quot; min=&quot;50&quot; max=&quot;250&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;oed&quot;&gt; Œdèmes aux deux pieds&lt;/label&gt;
+&lt;button id=&quot;ok&quot;&gt;Enregistrer&lt;/button&gt;
+&lt;div id=&quot;res&quot; role=&quot;status&quot; style=&quot;margin-top:14px;font-weight:700&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;note&quot;&gt;Seuils indicatifs : PB &amp;lt; 115 mm = sévère, 115 à 124 mm = modérée, ≥ 125 mm = normal. Œdèmes = sévère. À valider avec les protocoles nationaux.&lt;/p&gt;&lt;/section&gt;
+&lt;section&gt;&lt;h2&gt;Enfants enregistrés&lt;/h2&gt;&lt;div id=&quot;stat&quot; class=&quot;note&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;overflow-x:auto&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Nom&lt;/th&gt;&lt;th&gt;Âge&lt;/th&gt;&lt;th&gt;PB&lt;/th&gt;&lt;th&gt;Œdèmes&lt;/th&gt;&lt;th&gt;Résultat&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;liste&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;button class=&quot;sec&quot; id=&quot;vider&quot;&gt;Tout effacer&lt;/button&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;script&gt;
+const CLE=&quot;nutri_p1&quot;;const C={Normal:&quot;#1f5d3a&quot;,Modérée:&quot;#e67e22&quot;,Sévère:&quot;#c0392b&quot;};
+const lire=()=&gt;{try{return JSON.parse(localStorage.getItem(CLE))||[]}catch(e){return[]}};
+const ecrire=d=&gt;{try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}};
+function classer(pb,oed){if(oed||pb&lt;115)return&quot;Sévère&quot;;if(pb&lt;125)return&quot;Modérée&quot;;return&quot;Normal&quot;}
+function badge(r){return &#x27;&lt;span class=&quot;badge&quot; style=&quot;background:&#x27;+C[r]+&#x27;&quot;&gt;&#x27;+r+&#x27;&lt;/span&gt;&#x27;}
+function afficher(){const d=lire(),t=document.getElementById(&quot;liste&quot;);t.innerHTML=&quot;&quot;;
+if(!d.length){t.innerHTML=&#x27;&lt;tr&gt;&lt;td colspan=&quot;6&quot; class=&quot;vide&quot;&gt;Aucun enfant enregistré.&lt;/td&gt;&lt;/tr&gt;&#x27;}
+d.forEach((e,i)=&gt;{const tr=document.createElement(&quot;tr&quot;);
+tr.innerHTML=&quot;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&quot;+e.age+&quot; mois&lt;/td&gt;&lt;td&gt;&quot;+e.pb+&quot; mm&lt;/td&gt;&lt;td&gt;&quot;+(e.oed?&quot;Oui&quot;:&quot;Non&quot;)+&quot;&lt;/td&gt;&lt;td&gt;&quot;+badge(e.r)+&#x27;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;sec&quot; data-i=&quot;&#x27;+i+&#x27;&quot;&gt;Retirer&lt;/button&gt;&lt;/td&gt;&#x27;;
+tr.firstChild.textContent=e.nom;t.appendChild(tr)});
+const n=k=&gt;d.filter(e=&gt;e.r===k).length;
+document.getElementById(&quot;stat&quot;).textContent=d.length?d.length+&quot; enfant(s) : &quot;+n(&quot;Normal&quot;)+&quot; normal, &quot;+n(&quot;Modérée&quot;)+&quot; modérée, &quot;+n(&quot;Sévère&quot;)+&quot; sévère&quot;:&quot;&quot;}
+document.getElementById(&quot;ok&quot;).onclick=()=&gt;{
+const nom=document.getElementById(&quot;nom&quot;).value.trim(),age=+document.getElementById(&quot;age&quot;).value,pb=+document.getElementById(&quot;pb&quot;).value,oed=document.getElementById(&quot;oed&quot;).checked,res=document.getElementById(&quot;res&quot;);
+if(!nom||!age||!pb){res.style.color=&quot;#c0392b&quot;;res.textContent=&quot;Remplissez le nom, l&#x27;âge et le périmètre brachial.&quot;;return}
+const r=classer(pb,oed);const d=lire();d.unshift({nom,age,pb,oed,r});ecrire(d);
+res.style.color=C[r];res.textContent=nom+&quot; : &quot;+(r===&quot;Normal&quot;?&quot;état nutritionnel normal&quot;:r===&quot;Sévère&quot;?&quot;malnutrition aiguë sévère, orientation urgente&quot;:&quot;malnutrition aiguë modérée&quot;);
+[&quot;nom&quot;,&quot;age&quot;,&quot;pb&quot;].forEach(x=&gt;document.getElementById(x).value=&quot;&quot;);document.getElementById(&quot;oed&quot;).checked=false;afficher()};
+document.getElementById(&quot;liste&quot;).onclick=e=&gt;{const i=e.target.dataset.i;if(i===undefined)return;const d=lire();d.splice(+i,1);ecrire(d);afficher()};
+document.getElementById(&quot;vider&quot;).onclick=()=&gt;{if(confirm(&quot;Effacer tous les enfants ?&quot;)){ecrire([]);afficher()}};
+afficher();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" ></iframe><iframe id="f1" title="Repas locaux" srcdoc="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;fr&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Planificateur de repas locaux&lt;/title&gt;&lt;style&gt;
+:root{--vert:#1f5d3a;--vert2:#e6f0e8;--sol:#f2b632;--encre:#1d2a22;--fond:#fbfaf5;--rouge:#c0392b;--orange:#e67e22}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif;color:var(--encre);background:var(--fond)}
+header{background:var(--vert);color:#fff;padding:20px 16px}header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;opacity:.85}
+header a{color:var(--sol)}main{max-width:760px;margin:0 auto;padding:16px}
+section{background:#fff;border:1px solid #dfe5da;border-radius:10px;padding:16px;margin-bottom:16px}
+h2{margin:0 0 12px;font-size:1.15rem}label{display:block;font-weight:600;margin:10px 0 4px}
+input,select{width:100%;padding:10px;border:1px solid #b9c4b8;border-radius:6px;font:inherit}
+input[type=checkbox]{width:auto}button{background:var(--vert);color:#fff;border:0;border-radius:6px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;margin-top:12px}
+button.sec{background:#fff;color:var(--vert);border:1px solid var(--vert)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sol);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.row{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid #e5e9e1}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:700;font-size:.9rem}
+.note{font-size:.9rem;color:#55645a}.vide{color:#55645a;font-style:italic}
+&lt;/style&gt;
+&lt;style&gt;.grp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.grp label{font-weight:400;margin:0;padding:6px 8px;border:1px solid #dfe5da;border-radius:6px;cursor:pointer}
+h3{margin:14px 0 6px;font-size:1rem;color:var(--vert)}td.j{font-weight:700;white-space:nowrap}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;&lt;h1&gt;Planificateur de repas locaux&lt;/h1&gt;&lt;p&gt;Cochez les aliments disponibles chez vous.&lt;/p&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;section&gt;&lt;h2&gt;Aliments disponibles&lt;/h2&gt;&lt;div id=&quot;choix&quot;&gt;&lt;/div&gt;
+&lt;button id=&quot;go&quot;&gt;Proposer un menu&lt;/button&gt; &lt;button class=&quot;sec&quot; id=&quot;tout&quot;&gt;Tout cocher&lt;/button&gt;&lt;/section&gt;
+&lt;section id=&quot;sortie&quot; hidden&gt;&lt;h2&gt;Menu de la semaine&lt;/h2&gt;&lt;div id=&quot;msg&quot; class=&quot;note&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;overflow-x:auto&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Jour&lt;/th&gt;&lt;th&gt;Matin&lt;/th&gt;&lt;th&gt;Midi&lt;/th&gt;&lt;th&gt;Soir&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;menu&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p class=&quot;note&quot;&gt;Chaque repas associe une source d&#x27;énergie, une source de protéines et un légume ou fruit quand c&#x27;est possible. Menu indicatif, à adapter à l&#x27;âge et à la santé.&lt;/p&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;script&gt;
+const G={&quot;Énergie (féculents)&quot;:[&quot;Manioc&quot;,&quot;Chikwangue&quot;,&quot;Fufu de maïs&quot;,&quot;Riz&quot;,&quot;Banane plantain&quot;,&quot;Patate douce&quot;,&quot;Igname&quot;],
+&quot;Protéines&quot;:[&quot;Haricots&quot;,&quot;Poisson&quot;,&quot;Arachides&quot;,&quot;Œufs&quot;,&quot;Soja&quot;,&quot;Viande&quot;,&quot;Chenilles&quot;],
+&quot;Légumes et fruits&quot;:[&quot;Pondu (feuilles de manioc)&quot;,&quot;Amaranthe&quot;,&quot;Épinards&quot;,&quot;Chou&quot;,&quot;Aubergine&quot;,&quot;Mangue&quot;,&quot;Papaye&quot;,&quot;Avocat&quot;]};
+const cat=Object.keys(G),box=document.getElementById(&quot;choix&quot;);
+cat.forEach((c,k)=&gt;{const h=document.createElement(&quot;h3&quot;);h.textContent=c;box.appendChild(h);const g=document.createElement(&quot;div&quot;);g.className=&quot;grp&quot;;
+G[c].forEach(a=&gt;{const l=document.createElement(&quot;label&quot;),i=document.createElement(&quot;input&quot;);i.type=&quot;checkbox&quot;;i.dataset.k=k;i.value=a;l.appendChild(i);l.append(&quot; &quot;+a);g.appendChild(l)});box.appendChild(g)});
+const sel=k=&gt;[...box.querySelectorAll(&#x27;input[data-k=&quot;&#x27;+k+&#x27;&quot;]:checked&#x27;)].map(x=&gt;x.value);
+document.getElementById(&quot;tout&quot;).onclick=()=&gt;box.querySelectorAll(&quot;input&quot;).forEach(x=&gt;x.checked=true);
+function melange(a){a=a.slice();for(let i=a.length-1;i&gt;0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function pioche(){const f=[sel(0),sel(1),sel(2)];if(!f.some(x=&gt;x.length))return null;
+const file=f.map(x=&gt;melange(x));const idx=[0,0,0];
+return ()=&gt;file.map((x,k)=&gt;x.length?x[idx[k]++%x.length]:null).filter(Boolean).join(&quot; + &quot;)}
+document.getElementById(&quot;go&quot;).onclick=()=&gt;{const p=pioche(),s=document.getElementById(&quot;sortie&quot;),m=document.getElementById(&quot;msg&quot;),t=document.getElementById(&quot;menu&quot;);
+s.hidden=false;t.innerHTML=&quot;&quot;;
+if(!p){m.textContent=&quot;Cochez au moins un aliment pour obtenir un menu.&quot;;return}
+const manque=[0,1,2].filter(k=&gt;!sel(k).length).map(k=&gt;cat[k]);
+m.textContent=manque.length?&quot;Pour un repas plus complet, ajoutez : &quot;+manque.join(&quot;, &quot;)+&quot;.&quot;:&quot;Menu équilibré généré.&quot;;
+[&quot;Lundi&quot;,&quot;Mardi&quot;,&quot;Mercredi&quot;,&quot;Jeudi&quot;,&quot;Vendredi&quot;,&quot;Samedi&quot;,&quot;Dimanche&quot;].forEach(j=&gt;{const tr=document.createElement(&quot;tr&quot;);
+tr.innerHTML=&#x27;&lt;td class=&quot;j&quot;&gt;&#x27;+j+&quot;&lt;/td&gt;&quot;+[0,1,2].map(()=&gt;&quot;&lt;td&gt;&lt;/td&gt;&quot;).join(&quot;&quot;);
+[1,2,3].forEach(c=&gt;tr.children[c].textContent=p());t.appendChild(tr)})};
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" hidden></iframe><iframe id="f2" title="Surveillance" srcdoc="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;fr&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Surveillance des structures sanitaires&lt;/title&gt;&lt;style&gt;
+:root{--vert:#1f5d3a;--vert2:#e6f0e8;--sol:#f2b632;--encre:#1d2a22;--fond:#fbfaf5;--rouge:#c0392b;--orange:#e67e22}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,sans-serif;color:var(--encre);background:var(--fond)}
+header{background:var(--vert);color:#fff;padding:20px 16px}header h1{margin:0;font-size:1.4rem}header p{margin:4px 0 0;opacity:.85}
+header a{color:var(--sol)}main{max-width:760px;margin:0 auto;padding:16px}
+section{background:#fff;border:1px solid #dfe5da;border-radius:10px;padding:16px;margin-bottom:16px}
+h2{margin:0 0 12px;font-size:1.15rem}label{display:block;font-weight:600;margin:10px 0 4px}
+input,select{width:100%;padding:10px;border:1px solid #b9c4b8;border-radius:6px;font:inherit}
+input[type=checkbox]{width:auto}button{background:var(--vert);color:#fff;border:0;border-radius:6px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;margin-top:12px}
+button.sec{background:#fff;color:var(--vert);border:1px solid var(--vert)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sol);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.row{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid #e5e9e1}
+.badge{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:700;font-size:.9rem}
+.note{font-size:.9rem;color:#55645a}.vide{color:#55645a;font-style:italic}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;&lt;h1&gt;Surveillance des structures sanitaires&lt;/h1&gt;&lt;p&gt;Total des cas par maladie, avec alerte au-delà d&#x27;un seuil.&lt;/p&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;section&gt;&lt;h2&gt;Nouveau rapport&lt;/h2&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;&lt;label for=&quot;st&quot;&gt;Structure sanitaire&lt;/label&gt;&lt;input id=&quot;st&quot; placeholder=&quot;Ex. Centre de santé de Bandundu&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;ma&quot;&gt;Maladie&lt;/label&gt;&lt;select id=&quot;ma&quot;&gt;&lt;option&gt;Malnutrition aiguë&lt;/option&gt;&lt;option&gt;Paludisme&lt;/option&gt;&lt;option&gt;Rougeole&lt;/option&gt;&lt;option&gt;Choléra&lt;/option&gt;&lt;option&gt;Diarrhée&lt;/option&gt;&lt;option&gt;Infection respiratoire&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;row&quot;&gt;&lt;div&gt;&lt;label for=&quot;nb&quot;&gt;Nombre de cas&lt;/label&gt;&lt;input id=&quot;nb&quot; type=&quot;number&quot; min=&quot;1&quot;&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label for=&quot;se&quot;&gt;Seuil d&#x27;alerte (cas)&lt;/label&gt;&lt;input id=&quot;se&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;20&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;button id=&quot;ok&quot;&gt;Ajouter le rapport&lt;/button&gt;&lt;div id=&quot;err&quot; class=&quot;note&quot; style=&quot;color:#c0392b&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;note&quot;&gt;Le seuil de 20 cas est indicatif : validez-le avec votre encadreur ou les protocoles nationaux.&lt;/p&gt;&lt;/section&gt;
+&lt;section&gt;&lt;h2&gt;Total par maladie&lt;/h2&gt;&lt;div style=&quot;overflow-x:auto&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Maladie&lt;/th&gt;&lt;th&gt;Total des cas&lt;/th&gt;&lt;th&gt;État&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;tot&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/section&gt;
+&lt;section&gt;&lt;h2&gt;Rapports saisis&lt;/h2&gt;&lt;div style=&quot;overflow-x:auto&quot;&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Structure&lt;/th&gt;&lt;th&gt;Maladie&lt;/th&gt;&lt;th&gt;Cas&lt;/th&gt;&lt;th&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id=&quot;rap&quot;&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;button class=&quot;sec&quot; id=&quot;vider&quot;&gt;Tout effacer&lt;/button&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;script&gt;
+const CLE=&quot;nutri_p3&quot;;
+const lire=()=&gt;{try{return JSON.parse(localStorage.getItem(CLE))||[]}catch(e){return[]}};
+const ecrire=d=&gt;{try{localStorage.setItem(CLE,JSON.stringify(d))}catch(e){}};
+const seuil=()=&gt;+document.getElementById(&quot;se&quot;).value||20;
+function afficher(){const d=lire(),T=document.getElementById(&quot;tot&quot;),R=document.getElementById(&quot;rap&quot;);T.innerHTML=&quot;&quot;;R.innerHTML=&quot;&quot;;
+const somme={};d.forEach(r=&gt;somme[r.ma]=(somme[r.ma]||0)+r.nb);
+const k=Object.keys(somme);
+if(!k.length){T.innerHTML=&#x27;&lt;tr&gt;&lt;td colspan=&quot;3&quot; class=&quot;vide&quot;&gt;Aucun rapport.&lt;/td&gt;&lt;/tr&gt;&#x27;;R.innerHTML=&#x27;&lt;tr&gt;&lt;td colspan=&quot;4&quot; class=&quot;vide&quot;&gt;Aucun rapport.&lt;/td&gt;&lt;/tr&gt;&#x27;}
+k.forEach(m=&gt;{const a=somme[m]&gt;=seuil(),tr=document.createElement(&quot;tr&quot;);
+tr.innerHTML=&quot;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&quot;+somme[m]+&#x27;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge&quot; style=&quot;background:&#x27;+(a?&quot;#c0392b&quot;:&quot;#1f5d3a&quot;)+&#x27;&quot;&gt;&#x27;+(a?&quot;ALERTE&quot;:&quot;Normal&quot;)+&quot;&lt;/span&gt;&lt;/td&gt;&quot;;
+tr.firstChild.textContent=m;T.appendChild(tr)});
+d.forEach((r,i)=&gt;{const tr=document.createElement(&quot;tr&quot;);
+tr.innerHTML=&quot;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&quot;+r.nb+&#x27;&lt;/td&gt;&lt;td&gt;&lt;button class=&quot;sec&quot; data-i=&quot;&#x27;+i+&#x27;&quot;&gt;Retirer&lt;/button&gt;&lt;/td&gt;&#x27;;
+tr.children[0].textContent=r.st;tr.children[1].textContent=r.ma;R.appendChild(tr)})}
+document.getElementById(&quot;ok&quot;).onclick=()=&gt;{const st=document.getElementById(&quot;st&quot;).value.trim(),ma=document.getElementById(&quot;ma&quot;).value,nb=+document.getElementById(&quot;nb&quot;).value,e=document.getElementById(&quot;err&quot;);
+if(!st||nb&lt;1){e.textContent=&quot;Indiquez la structure et un nombre de cas supérieur à 0.&quot;;return}
+e.textContent=&quot;&quot;;const d=lire();d.unshift({st,ma,nb});ecrire(d);document.getElementById(&quot;st&quot;).value=&quot;&quot;;document.getElementById(&quot;nb&quot;).value=&quot;&quot;;afficher()};
+document.getElementById(&quot;rap&quot;).onclick=e=&gt;{const i=e.target.dataset.i;if(i===undefined)return;const d=lire();d.splice(+i,1);ecrire(d);afficher()};
+document.getElementById(&quot;se&quot;).oninput=afficher;
+document.getElementById(&quot;vider&quot;).onclick=()=&gt;{if(confirm(&quot;Effacer tous les rapports ?&quot;)){ecrire([]);afficher()}};
+afficher();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+" hidden></iframe>
+<p class="note">Prototypes pédagogiques. Les seuils sont indicatifs : validez-les avec votre encadreur ou les protocoles nationaux avant tout usage réel. Les données restent dans le navigateur de chaque utilisateur.</p>
+<script>function show(n){for(var i=0;i<3;i++){document.getElementById("f"+i).hidden=i!==n;document.getElementById("b"+i).className=i===n?"on":""}}</script>
+</body></html>
