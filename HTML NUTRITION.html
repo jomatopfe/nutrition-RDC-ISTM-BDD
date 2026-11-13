@@ -8,7 +8,11 @@ nav{display:flex;gap:6px;flex-wrap:wrap}nav button{border:0;background:#2f7a50;c
 nav button.on{background:#fbfaf5;color:#1f5d3a}nav button:focus-visible{outline:3px solid #f2b632}
 iframe{display:block;width:100%;max-width:900px;margin:0 auto;height:calc(100vh - 150px);min-height:600px;border:0}
 .note{max-width:900px;margin:0 auto;padding:8px 16px 24px;font-size:.9rem;color:#55645a}
-</style></head><body>
+</style><style>#gate{max-width:360px;margin:15vh auto;padding:24px;background:#fff;border:1px solid #dfe5da;border-radius:10px;text-align:center}
+#gate h2{margin:0 0 8px;color:#1f5d3a}#gate input{width:100%;padding:10px;border:1px solid #b9c4b8;border-radius:6px;font:inherit;margin:10px 0}
+#gate button{background:#1f5d3a;color:#fff;border:0;border-radius:6px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer}
+#gate button:focus-visible,#gate input:focus-visible{outline:3px solid #f2b632}#err{color:#c0392b;min-height:1.4em;font-size:.9rem}</style></head><body><div id="gate"><h2>Accès protégé</h2><p>Entrez le code d'accès pour ouvrir l'application.</p>
+<input id="code" type="password" placeholder="Code d'accès" autocomplete="off"><div id="err" role="alert"></div><button id="go">Ouvrir</button></div><div id="app" hidden>
 <div class="hero"><div><h1>Mieux suivre la nutrition en RDC</h1><p>Trois outils simples, conçus à l'ISTM Bandundu : repérer les enfants malnutris, composer des repas avec les aliments du pays, surveiller les maladies dans les structures de santé.</p>
 <nav><button id="b0" onclick="show(0)" class=on>1. Dépistage malnutrition</button><button id="b1" onclick="show(1)">2. Repas locaux</button><button id="b2" onclick="show(2)">3. Surveillance</button></nav></div></div>
 <iframe id="f0" title="Dépistage malnutrition" srcdoc="&lt;!DOCTYPE html&gt;&lt;html lang=&quot;fr&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
@@ -167,4 +171,13 @@ afficher();
 " hidden></iframe>
 <p class="note">Prototypes pédagogiques. Les seuils sont indicatifs : validez-les avec votre encadreur ou les protocoles nationaux avant tout usage réel. Les données restent dans le navigateur de chaque utilisateur.</p>
 <script>function show(n){for(var i=0;i<3;i++){document.getElementById("f"+i).hidden=i!==n;document.getElementById("b"+i).className=i===n?"on":""}}</script>
-</body></html>
+</div><script>
+var HASH="78eb3c9cd094ae451ef695486cb906fad6a750bd27d16527acd0536500fd816d";
+async function sha(t){var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")}
+function ouvrir(){document.getElementById("gate").hidden=true;document.getElementById("app").hidden=false}
+async function verifier(){var v=document.getElementById("code").value.trim();
+if(await sha(v)===HASH){try{sessionStorage.setItem("acces","1")}catch(e){}ouvrir()}else{document.getElementById("err").textContent="Code incorrect. Réessayez."}}
+document.getElementById("go").onclick=verifier;
+document.getElementById("code").onkeydown=function(e){if(e.key==="Enter")verifier()};
+try{if(sessionStorage.getItem("acces")==="1")ouvrir()}catch(e){}
+</script></body></html>
